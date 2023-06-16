@@ -1,0 +1,16 @@
+.CardsContainer {
+    margin-top: 20px;
+    max-width: 80vw;
+    margin-bottom: 30px;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 40px;
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: calc(100% - 130px);
+    overflow: auto;
+}
