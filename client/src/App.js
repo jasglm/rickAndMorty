@@ -9,6 +9,7 @@ import Error404 from "./views/Error404/Error404.jsx";
 import Login from "./views/Login/Login.jsx";
 import "./App.css";
 import Favorites from "./views/Favorites/Favorites.jsx";
+const URL = "http://localhost:3001/rickandmorty/login/";
 
 function App() {
 	const [characters, setCharacters] = useState([]);
@@ -28,16 +29,32 @@ function App() {
 	// 	}
 	// }
 
-	function handleLogin(userData) {
-		const { email, password } = userData;
-		const URL = "http://localhost:3001/rickandmorty/login/";
-		axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+	//!			-----*** EXPRESS && PROMISES ***-----
+	// function handleLogin(userData) {
+	// 	const { email, password } = userData;
+	// 	const URL = "http://localhost:3001/rickandmorty/login/";
+	// 	axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+	// 		const { access } = data;
+	// 		if (access === true) {
+	// 			setAccess(access);
+	// 			access && navigate("/home");
+	// 		} else window.alert("Credenciales invalidas");
+	// 	});
+	// }
+
+	//!			-----*** EXPRESS && Async/Await && Try/Catch ***-----
+	async function handleLogin(userData) {
+		try {
+			const { email, password } = userData;
+			const { data } = await axios(
+				URL + `?email=${email}&password=${password}`
+			);
 			const { access } = data;
-			if (access === true) {
-				setAccess(access);
-				navigate("/home");
-			} else window.alert("Credenciales invalidas");
-		});
+			setAccess(access);
+			access && navigate("/home");
+		} catch (error) {
+			console.log(error.message);
+		}
 	}
 
 	useEffect(() => {
@@ -55,19 +72,38 @@ function App() {
 		return characters.some((character) => character.id === parsedId);
 	}
 
-	function onSearch(id) {
-		if (isDuplicate(id) === true)
-			return window.alert("El personaje ya se encuentra en la cardlist");
-		else {
-			axios(`http://localhost:3001/rickandmorty/character/${id}`).then(
-				({ data }) => {
-					if (data.name) {
-						setCharacters((oldChars) => [...oldChars, data]);
-					} else {
-						window.alert("¡No hay personajes con este ID!");
-					}
-				}
-			);
+	//!			-----*** EXPRESS && PROMISES ***-----
+	// function onSearch(id) {
+	// 	if (isDuplicate(id) === true)
+	// 		return window.alert("El personaje ya se encuentra en la cardlist");
+	// 	else {
+	// 		axios(`http://localhost:3001/rickandmorty/character/${id}`).then(
+	// 			({ data }) => {
+	// 				if (data.name) {
+	// 					setCharacters((oldChars) => [...oldChars, data]);
+	// 				} else {
+	// 					window.alert("¡No hay personajes con este ID!");
+	// 				}
+	// 			}
+	// 		);
+	// 	}
+	// }
+
+	//!			-----*** EXPRESS && Async/Await && Try/Catch ***-----
+	async function onSearch(id) {
+		try {
+			if (isDuplicate(id) === true)
+				return window.alert(
+					"El personaje ya se encuentra en la cardlist"
+				);
+			else {
+				const { data } = await axios(
+					`http://localhost:3001/rickandmorty/character/${id}`
+				);
+				if (data.name) setCharacters((oldChars) => [...oldChars, data]);
+			}
+		} catch (error) {
+			window.alert("¡No hay personajes con este ID!");
 		}
 	}
 
