@@ -51,7 +51,7 @@ function Card(props) {
 					<h2>Gender: {gender}</h2>
 				</div>
 			</div>
-			<div className={style.buttonContainerMic}>
+			<div className={style.buttonsContainer}>
 				<NavLink to={`/detail/${id}`}>
 					<button className={style.microscopeContainer}>
 						<img
@@ -62,9 +62,19 @@ function Card(props) {
 					</button>
 				</NavLink>
 				{isFav ? (
-					<button onClick={handleFavorite}>❤️</button>
+					<button
+						className={style.favbutton1}
+						onClick={handleFavorite}
+					>
+						❤️
+					</button>
 				) : (
-					<button onClick={handleFavorite}>🤍</button>
+					<button
+						className={style.favbutton2}
+						onClick={handleFavorite}
+					>
+						🤍
+					</button>
 				)}
 			</div>
 		</div>

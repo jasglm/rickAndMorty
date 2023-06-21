@@ -13,23 +13,35 @@ import Favorites from "./views/Favorites/Favorites.jsx";
 function App() {
 	const [characters, setCharacters] = useState([]);
 	const [access, setAccess] = useState(false);
-	const EMAIL = "jas@prueba.com";
-	const PASSWORD = "12345678";
 	const navigate = useNavigate();
+	//! 		-->***Manejo de login en FRONTEND***<--
+	// const EMAIL = "jas@prueba.com";
+	// const PASSWORD = "12345678";
+
+	//! 		-->***Manejo de login en FRONTEND***<--
+	// function handleLogin(userData) {
+	// 	if (userData.password === PASSWORD && userData.email === EMAIL) {
+	// 		setAccess(true);
+	// 		navigate("/home");
+	// 	} else {
+	// 		window.alert("Credenciales invalidas");
+	// 	}
+	// }
 
 	function handleLogin(userData) {
-		if (userData.password === PASSWORD && userData.email === EMAIL) {
-			setAccess(true);
-			navigate("/home");
-		} else {
-			window.alert("Credenciales invalidas");
-		}
+		const { email, password } = userData;
+		const URL = "http://localhost:3001/rickandmorty/login/";
+		axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+			const { access } = data;
+			if (access === true) {
+				setAccess(access);
+				navigate("/home");
+			} else window.alert("Credenciales invalidas");
+		});
 	}
 
 	useEffect(() => {
-		if (!access) {
-			navigate("/");
-		}
+		!access && navigate("/");
 	}, [access, navigate]);
 
 	function handleLogout() {

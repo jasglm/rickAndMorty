@@ -4,6 +4,8 @@ import Cards from "../../components/Cards/Cards";
 import { NavLink } from "react-router-dom";
 import style from "./Favorites.module.css";
 import { orderCards, filterCards, showAllCards } from "../../redux/actions";
+import homeButton from "../../icons/rocket-solid.svg";
+import videoFavorites from "../../videos/rym3.mp4";
 
 function Favorites(props) {
 	const dispatch = useDispatch();
@@ -29,26 +31,39 @@ function Favorites(props) {
 
 	return (
 		<div>
-			<NavLink to="/home">
-				<button className={style.homeButton}>HOME</button>
-			</NavLink>
-			<NavLink to="/about">
-				<button className={style.homeButton}>ABOUT</button>
-			</NavLink>
-			<label htmlFor=""> Ordenar por id: </label>
-			<select onChange={handleOrder}>
-				<option value="A">Ascendente</option>
-				<option value="D">Descendente</option>
-			</select>
-			<label htmlFor=""> Filtrar: </label>
-			<select onChange={handleFilter}>
-				<option value="ALL">Todos</option>
-				<option value="Male">Male</option>
-				<option value="Female">Female</option>
-				<option value="Genderless">Genderless</option>
-				<option value="unknown">unknown</option>
-			</select>
-
+			<div className={style.videoContainer}>
+				<video className={style.video} autoPlay loop muted>
+					<source src={videoFavorites} type="video/mp4" />
+				</video>
+			</div>
+			<div className={style.favoritesNavBarContainer}>
+				<NavLink to="/home">
+					<button className={style.homeButtonContainer}>
+						HOME
+						<img
+							className={style.homeButton}
+							src={homeButton}
+							alt="homeButton"
+						/>
+					</button>
+				</NavLink>
+				<NavLink to="/about">
+					<button className={style.aboutButton}>About</button>
+				</NavLink>
+				<label className={style.ordenar}> Ordenar por id: </label>
+				<select onChange={handleOrder}>
+					<option value="A">Ascendente</option>
+					<option value="D">Descendente</option>
+				</select>
+				<label className={style.filtrar}> Filtrar: </label>
+				<select onChange={handleFilter}>
+					<option value="ALL">Todos</option>
+					<option value="Male">Male</option>
+					<option value="Female">Female</option>
+					<option value="Genderless">Genderless</option>
+					<option value="unknown">unknown</option>
+				</select>
+			</div>
 			<Cards characters={favorites} isFavoriteView={true} />
 		</div>
 	);

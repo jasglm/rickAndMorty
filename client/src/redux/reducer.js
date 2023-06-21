@@ -5,20 +5,29 @@ export default function rootReducer(state = initalState, action) {
 	switch (action.type) {
 		case ADD_FAV:
 			return {
+				//! 		-->Manejo en BACKEND<--
 				...state,
-				myFavorites: [...state.myFavorites, action.payload],
-				allCharacters: [...state.allCharacters, action.payload],
+				myFavorites: action.payload,
+				allCharacters: action.payload,
+				//! 		-->Manejo en FRONTEND<--
+				// ...state,
+				// myFavorites: [...state.myFavorites, action.payload],
+				// allCharacters: [...state.allCharacters, action.payload],
 			};
 
 		case REMOVE_FAV:
 			return {
+				//! 		-->Manejo en BACKEND<--
 				...state,
-				myFavorites: state.myFavorites.filter(
-					(character) => character.id !== Number(action.payload)
-				),
-				allCharacters: state.allCharacters.filter(
-					(character) => character.id !== Number(action.payload)
-				),
+				myFavorites: action.payload,
+				//! 		-->Manejo en FRONTEND<--
+				// ...state,
+				// myFavorites: state.myFavorites.filter(
+				// 	(character) => character.id !== Number(action.payload)
+				// ),
+				// allCharacters: state.allCharacters.filter(
+				// 	(character) => character.id !== Number(action.payload)
+				// ),
 			};
 
 		case FILTER:

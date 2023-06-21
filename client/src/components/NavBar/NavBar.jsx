@@ -36,7 +36,10 @@ export default function NavBar(props) {
 					<button className={style.aboutButton}>About</button>
 				</NavLink>
 				<NavLink to="/favorites">
-					<button className={style.favoritesButton}>Fav</button>
+					<button className={style.heartButton}>
+						<span className={style.heartIcon}></span>
+						<span className={style.buttonTextFav}>FAVORITES</span>
+					</button>
 				</NavLink>
 			</div>
 
