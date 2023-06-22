@@ -60,7 +60,6 @@
 //!			-----*** EXPRESS && Async/Await && Try/Catch ***-----
 const URL = "https://rickandmortyapi.com/api/character/";
 const axios = require("axios");
-const { response } = require("express");
 
 const getCharById = async (req, res) => {
 	try {
