@@ -132,17 +132,19 @@
 	background: linear-gradient(to right, #46ac17, #b0ba21);
 
 	&:hover {
-		scale: 1.1;
+		transform: scale(1.1);
 	}
 }
+
 .favbutton2 {
 	border-radius: 50%;
 	height: 30px;
 	width: 30px;
 	cursor: pointer;
 	background: linear-gradient(to right, #46ac17, #b0ba21);
+
 	&:hover {
-		scale: 1.1;
+		transform: scale(1.1);
 	}
 }
 
@@ -150,4 +152,14 @@
 	display: flex;
 	align-items: flex-end;
 	justify-content: space-around;
+}
+
+.favbutton1.active {
+	background-color: red;
+	color: white;
+}
+
+.favbutton2.active {
+	background-color: red;
+	color: white;
 }

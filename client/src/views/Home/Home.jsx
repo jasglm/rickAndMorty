@@ -4,14 +4,18 @@ import videoRM from "../../videos/rym2.mp4";
 import style from "./Home.module.css";
 
 export default function Home(props) {
-	const { characters, onClose } = props;
+	const { characters, onClose, favorites } = props;
 
 	return (
 		<div>
 			<video className={style.BackgroundVideo} autoPlay loop muted>
 				<source src={videoRM} type="video/mp4" />
 			</video>
-			<Cards characters={characters} onClose={onClose} />
+			<Cards
+				characters={characters}
+				onClose={onClose}
+				favorites={favorites}
+			/>
 		</div>
 	);
 }

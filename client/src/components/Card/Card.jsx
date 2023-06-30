@@ -80,6 +80,7 @@ function Card(props) {
 		</div>
 	);
 }
+
 const mapDispatchToProps = (dispatch) => {
 	return {
 		addFavorite: (character) => dispatch(addFavorite(character)),
@@ -92,4 +93,5 @@ const mapStateToProps = (state) => {
 		favorites: state.myFavorites,
 	};
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(Card);
